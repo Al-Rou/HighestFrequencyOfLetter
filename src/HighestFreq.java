@@ -12,7 +12,8 @@ public class HighestFreq {
         //This is for searching
         char auxiliary = 'a';
         //This is the final letter which has the highest occurrence
-        char letter = 'a';
+        char[] letter = new char[26];
+        int arrayCounter = 0;
         //This is simply a counter
         int frequency = 0;
         //This shows the highest frequency of a letter inside the entered sentence
@@ -36,7 +37,15 @@ public class HighestFreq {
             {
                 maxFrequency = frequency;
                 frequency = 0;
-                letter = (char) (auxiliary+i);
+                letter[arrayCounter] = (char) (auxiliary+i);
+                arrayCounter++;
+            }
+            //In case more than one letter has been repeated with the highest frequency
+            else if((frequency == maxFrequency) && ((maxFrequency > 0)))
+            {
+                frequency = 0;
+                letter[arrayCounter] = (char) (auxiliary+i);
+                arrayCounter++;
             }
             else
             {
@@ -44,7 +53,13 @@ public class HighestFreq {
                 frequency = 0;
             }
         }
-        System.out.println("The letter " + letter + " has been repeated (regardless of being small or capital) "
+        System.out.print("The letter(s) ");
+        for(int i = 0; i < arrayCounter-1; i++)
+        {
+            System.out.print(letter[i] + ", ");
+        }
+        System.out.print(letter[arrayCounter-1]);
+        System.out.print(" has/have been repeated (regardless of being small or capital) "
                 +maxFrequency+" times," +
                 " which is the maximum in this entered sentence!");
     }
